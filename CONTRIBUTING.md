@@ -1,7 +1,7 @@
 # Contributing
 
-This is a private, proprietary repository. Contributions are limited to the
-core team and authorized collaborators.
+turbo-stack is an open-source monorepo template, released under the MIT
+license. Issues and pull requests are welcome.
 
 ## Prerequisites
 

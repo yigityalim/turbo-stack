@@ -26,5 +26,5 @@ you informed as the issue is addressed.
 
 ## Supported Versions
 
-This is an actively developed private project; only the latest `main` is
+This is an actively developed project; only the latest `main` is
 supported.

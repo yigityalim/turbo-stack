@@ -1,6 +1,6 @@
 # Support
 
-This is a private project maintained by the core team.
+turbo-stack is an open-source template maintained by its author and contributors.
 
 - **Bugs / feature requests:** open an issue using the templates in
   `.github/ISSUE_TEMPLATE/`.
