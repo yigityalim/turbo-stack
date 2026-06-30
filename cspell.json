@@ -1,0 +1,29 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "turbo-stack",
+    "turborepo",
+    "biomejs",
+    "bunfig",
+    "bunx",
+    "knip",
+    "lefthook",
+    "commitlint",
+    "changesets",
+    "supabase",
+    "shadcn",
+    "tailwindcss",
+    "nuqs",
+    "vercel",
+    "Yalım",
+    "Yiğit"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "**/.next/**",
+    "**/dist/**",
+    "**/.turbo/**",
+    "bun.lock"
+  ]
+}

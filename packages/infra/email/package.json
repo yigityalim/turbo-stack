@@ -1,0 +1,35 @@
+{
+  "name": "@repo/email",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./resend": "./src/adapters/resend.ts",
+    "./testing": "./src/testing.ts",
+    "./plugins/defaults": "./src/plugins/defaults.ts",
+    "./plugins/observability": "./src/plugins/observability.ts",
+    "./plugins/capture": "./src/plugins/capture.ts",
+    "./emails/*": "./src/emails/*"
+  },
+  "scripts": {
+    "dev": "email dev --dir src/emails --port 4444",
+    "lint": "biome check .",
+    "type-check": "tsc --noEmit",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@react-email/components": "catalog:",
+    "@react-email/render": "catalog:",
+    "react": "catalog:",
+    "react-email": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
+  }
+}

@@ -1,0 +1,49 @@
+# Bun configuration — turbo-stack monorepo
+# This repo uses bun exclusively (never npm/npx/pnpm/yarn).
+#
+# Hardened for supply-chain safety. Three layers do the heavy lifting:
+#   1. [install.security] scanner  -> blocks malicious/CVE packages before install
+#   2. minimumReleaseAge           -> ignores brand-new versions (0-day attack window)
+#   3. exact = true                -> pins exact versions, no caret/range drift
+#
+# Companion steps NOT covered by this file (do these too):
+#   - commit bun.lock; CI uses: bun install --frozen-lockfile
+#   - pin transitive deps via "overrides"/"resolutions" in package.json
+#   - run `bun audit` in CI; pin GitHub Actions to SHAs (zizmor + pinact)
+#   - trusted lifecycle scripts are controlled via package.json "trustedDependencies"
+
+[install]
+# Resolve peer dependencies.
+peer = true
+
+# Pin exact versions instead of ^ranges, so a compromised package can't be
+# auto-pulled via a new minor/patch.
+exact = true
+
+# Don't install a version until it has been public for this many seconds.
+# 604800 = 7 days. Most malicious releases get caught and yanked within hours,
+# so this closes the window. Applies to transitive deps too.
+# Loosen if it ever blocks an urgent security patch you actually need.
+minimumReleaseAge = 604800
+
+[install.cache]
+disable = false
+
+[install.security]
+# Keystone layer. Scans every package before install, surfaces advisories,
+# and cancels the install on critical findings (also auto-disables auto-install).
+# Requires the scanner package: bun add -d @socketsecurity/bun-security-scanner
+# Swap for your org's vendor (e.g. Aikido) if you use a different one.
+scanner = "@socketsecurity/bun-security-scanner"
+
+[run]
+# Auto-alias `node` -> `bun` inside scripts and use the system shell.
+bun = true
+shell = "system"
+
+[test]
+# Native bun test runner. Unit tests are colocated as *.test.ts next to source.
+# Coverage stays opt-in (`bun test --coverage`); these only shape its output.
+coverageSkipTestFiles = true
+coverageReporter = ["text", "lcov"]
+coverageDir = "coverage"

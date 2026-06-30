@@ -1,0 +1,43 @@
+{
+  "Internal package entry": {
+    "scope": "typescript",
+    "prefix": "apx-pkg-index",
+    "body": [
+      "export const PACKAGE_NAME = \"@repo/${1:name}\";",
+      "$0"
+    ],
+    "description": "Stub entry point for a new internal package"
+  },
+  "bun:test block": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "apx-test",
+    "body": [
+      "import { expect, test } from \"bun:test\";",
+      "",
+      "test(\"${1:does the thing}\", () => {",
+      "\texpect(${2:value}).toBe(${3:expected});",
+      "});",
+      "$0"
+    ],
+    "description": "bun:test test block"
+  },
+  "Zod schema + type": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "apx-zod",
+    "body": [
+      "export const ${1:name}Schema = z.object({",
+      "\t$0",
+      "});",
+      "export type ${1/(.*)/${1:/capitalize}/} = z.infer<typeof ${1:name}Schema>;"
+    ],
+    "description": "Zod schema with inferred type"
+  },
+  "Throw AppError": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "apx-throw",
+    "body": [
+      "throw AppError.${1|notFound,forbidden,unauthorized,validation,conflict,internal|}(${2:\"detail\"});"
+    ],
+    "description": "Throw a catalog-driven AppError"
+  }
+}

@@ -1,0 +1,48 @@
+name: Workflow security
+
+on:
+  push:
+    branches: [main]
+    paths: [".github/**"]
+  pull_request:
+    branches: [main]
+    paths: [".github/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Lint, pin-check & audit workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version: stable
+
+      - name: Install workflow tools
+        run: |
+          go install github.com/rhysd/actionlint/cmd/actionlint@latest
+          go install github.com/suzuki-shunsuke/pinact/v3/cmd/pinact@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/zizmorcore/zizmor/releases/latest/download/zizmor-installer.sh | sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: actionlint
+        run: actionlint
+
+      - name: Verify Actions are SHA-pinned
+        run: |
+          pinact run
+          git diff --exit-code
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: zizmor
+        run: zizmor --offline .github/workflows .github/actions

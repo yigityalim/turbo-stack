@@ -1,0 +1,33 @@
+# Normalize line endings to LF on checkin; check out as-is.
+* text=auto eol=lf
+
+# Explicit text files
+*.ts      text
+*.tsx     text
+*.js      text
+*.mjs     text
+*.json    text
+*.md      text
+*.yml     text
+*.yaml    text
+*.css     text
+*.toml    text
+
+# Binary assets — never diff or convert
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.webp    binary
+*.avif    binary
+*.ico     binary
+*.woff    binary
+*.woff2   binary
+*.ttf     binary
+*.otf     binary
+*.eot     binary
+*.pdf     binary
+*.zip     binary
+
+# Lockfiles — generated, collapse in diffs and exclude from language stats
+bun.lock  linguist-generated=true -diff

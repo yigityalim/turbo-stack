@@ -1,0 +1,41 @@
+# Turbo Stack — git hooks (managed by lefthook)
+# Install once: `bunx lefthook install` (also runs via `bun run prepare`).
+#
+# The actionlint/pinact/zizmor jobs are best-effort: they run when the tool is
+# on PATH and skip (without failing the commit) when it is not. CI enforces them
+# authoritatively (.github/workflows/workflow-security.yml). See CONTRIBUTING.md
+# for installing them.
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: biome
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,css}"
+      run: bunx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {staged_files}
+      stage_fixed: true
+
+    - name: gitleaks
+      run: 'if command -v gitleaks >/dev/null 2>&1; then gitleaks protect --staged --redact --no-banner --config .gitleaks.toml; else echo "gitleaks not on PATH — skipping (see CONTRIBUTING.md)"; fi'
+
+    - name: actionlint
+      glob: ".github/workflows/*.{yml,yaml}"
+      run: 'if command -v actionlint >/dev/null 2>&1; then actionlint {staged_files}; else echo "actionlint not on PATH — skipping (see CONTRIBUTING.md)"; fi'
+
+    - name: pinact
+      glob: ".github/**/*.{yml,yaml}"
+      run: 'if command -v pinact >/dev/null 2>&1; then pinact run; else echo "pinact not on PATH — skipping (see CONTRIBUTING.md)"; fi'
+      stage_fixed: true
+
+    - name: zizmor
+      glob: ".github/**/*.{yml,yaml}"
+      run: 'if command -v zizmor >/dev/null 2>&1; then zizmor --offline --quiet .github/workflows .github/actions; else echo "zizmor not on PATH — skipping (see CONTRIBUTING.md)"; fi'
+
+pre-push:
+  jobs:
+    - name: type-check
+      run: bun run type-check
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: bunx commitlint --edit {1}

@@ -1,0 +1,9 @@
+# Repo-wide tool versions (optional). With mise installed, `mise install`
+# provisions all three at once. These mirror the canonical pins elsewhere:
+#   bun  -> package.json "packageManager"
+#   node -> .nvmrc
+#   rust -> crates/rust-toolchain.toml
+[tools]
+bun = "1.3.13"
+node = "20"
+rust = "stable"

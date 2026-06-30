@@ -1,0 +1,10 @@
+-- Supabase seed data.
+--
+-- Runs after migrations on `supabase db reset` (local/dev only). Add INSERTs
+-- here to seed reference/dev data. Keep statements idempotent (e.g. ON CONFLICT
+-- DO NOTHING) so re-seeding never fails.
+--
+-- Example:
+--   insert into public.plans (slug, name)
+--   values ('free', 'Free'), ('pro', 'Pro')
+--   on conflict (slug) do nothing;

@@ -1,0 +1,37 @@
+{
+  "name": "turbo-stack",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/rust:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "containerEnv": {
+    "BUN_INSTALL": "/home/node/.bun"
+  },
+  "remoteEnv": {
+    "PATH": "/home/node/.bun/bin:${containerEnv:PATH}"
+  },
+  "postCreateCommand": "curl -fsSL https://bun.sh/install | bash && bun install && bunx lefthook install",
+  "forwardPorts": [3000, 4444, 54321],
+  "portsAttributes": {
+    "3000": { "label": "web" },
+    "4444": { "label": "email preview" },
+    "54321": { "label": "supabase" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "biomejs.biome",
+        "bradlc.vscode-tailwindcss",
+        "yoavbls.pretty-ts-errors",
+        "usernamehw.errorlens",
+        "eamodio.gitlens",
+        "github.vscode-pull-request-github",
+        "github.vscode-github-actions",
+        "supabase.supabase-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "rust-lang.rust-analyzer"
+      ]
+    }
+  }
+}

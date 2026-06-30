@@ -1,0 +1,19 @@
+title = "turbo-stack gitleaks config"
+
+# Start from gitleaks' built-in rule set, then narrow with the allowlist below.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated files and documented placeholder values"
+paths = [
+  '''bun\.lock''',
+  '''(^|/)CHANGELOG\.md$''',
+  '''(^|/)\.changeset/''',
+]
+# Example/placeholder secrets that appear in docs and templates.
+regexes = [
+  '''re_\.\.\.''',
+  '''your-project\.supabase\.co''',
+  '''change-me-in-production''',
+]

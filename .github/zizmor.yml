@@ -1,0 +1,7 @@
+# zizmor configuration — https://docs.zizmor.sh/configuration/
+rules:
+  artipacked:
+    ignore:
+      # changesets/action pushes the "version packages" PR using the checkout's
+      # persisted GITHUB_TOKEN; persist-credentials:false would break it.
+      - release.yml
