@@ -4,7 +4,7 @@ members = ["hashing"]
 
 [workspace.package]
 edition = "2021"
-license = "UNLICENSED"
+license = "MIT"
 publish = false
 
 # Optimize wasm artifacts for size.

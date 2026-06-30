@@ -7,7 +7,7 @@ with `bun run gen` so you never assemble this by hand.
 
 ```
 <group>/<name>/
-├── package.json      # @repo/<name>, version 0.0.0, private, UNLICENSED
+├── package.json      # @repo/<name>, version 0.0.0, private, MIT
 ├── README.md         # what it is, how to use it
 ├── CHANGELOG.md      # managed by changesets
 ├── tsconfig.json     # extends @repo/typescript-config/*
