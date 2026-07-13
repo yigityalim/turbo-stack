@@ -110,6 +110,7 @@
     "@sentry/nextjs": "10.65.0",
     "posthog-js": "1.399.4",
     "@vercel/analytics": "2.0.1",
+    "workflow": "4.6.0",
     "tsup": "8.5.0"
   },
   "workspaces": [

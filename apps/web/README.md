@@ -12,6 +12,10 @@ and the shared UI kit. Serves as the reference for how apps consume the packages
   `requireClaims()` guards, and email/password sign-in / sign-up / sign-out
   through server actions.
 - **`@repo/db`** — the typed Supabase client under the auth helpers.
+- **`@repo/email` + Workflow SDK** — a durable onboarding flow
+  (`workflows/welcome.ts`) fired on sign-up: welcome email now, a follow-up a day
+  later via `sleep("1d")`, surviving restarts and deploys. Enabled by
+  `withWorkflow` in `next.config.ts`; each step retries independently.
 
 ## Routes
 

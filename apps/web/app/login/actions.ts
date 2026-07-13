@@ -2,6 +2,8 @@
 
 import { createServerClient } from "@repo/auth/server";
 import { redirect } from "next/navigation";
+import { start } from "workflow/api";
+import { welcomeWorkflow } from "@/workflows/welcome";
 
 export interface AuthState {
   error?: string;
@@ -28,5 +30,6 @@ export async function signUp(_prev: AuthState, formData: FormData): Promise<Auth
   const { error } = await supabase.auth.signUp({ email, password });
   if (error) return { error: error.message };
 
+  await start(welcomeWorkflow, [email]);
   redirect("/dashboard");
 }

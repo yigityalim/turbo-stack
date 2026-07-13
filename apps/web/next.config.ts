@@ -1,9 +1,16 @@
 import type { NextConfig } from "next";
+import { withWorkflow } from "workflow/next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  // Workspace packages ship TypeScript source (JIT, no build) — Next transpiles them.
-  transpilePackages: ["@repo/ui", "@repo/auth", "@repo/db", "@repo/env", "@repo/types"],
+  transpilePackages: [
+    "@repo/ui",
+    "@repo/auth",
+    "@repo/db",
+    "@repo/email",
+    "@repo/env",
+    "@repo/types",
+  ],
 };
 
-export default nextConfig;
+export default withWorkflow(nextConfig);
