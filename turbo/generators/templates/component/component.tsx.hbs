@@ -1,0 +1,9 @@
+import { cn } from "@repo/ui/lib/utils";
+import type * as React from "react";
+
+/** TODO: describe {{ pascalCase name }}. */
+function {{ pascalCase name }}({ className, ...props }: React.ComponentProps<"div">) {
+  return <div data-slot="{{ kebabCase name }}" className={cn(className)} {...props} />;
+}
+
+export { {{ pascalCase name }} };

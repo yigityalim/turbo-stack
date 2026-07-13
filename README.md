@@ -8,7 +8,8 @@ security-hardened, ready to clone and build on.
 - **bun** workspaces + **Turborepo** pipeline, organized by domain group
 - **Biome** (lint + format) · **knip** · **lefthook** · **commitlint** · **changesets**
 - **Security:** Socket scanner, CodeQL, dependency-review, gitleaks, SHA-pinned
-  Actions (pinact), zizmor — see [docs/security.md](docs/security.md)
+  Actions (pinact), zizmor, Renovate, cargo-audit, OpenSSF Scorecard, SBOM — see
+  [docs/security.md](docs/security.md)
 - **Packages:** `@repo/{types,env,errors,logger,flags,security,email,ui}` +
   `tooling/{typescript-config,tsup-config}`
 - **Apps** (blank, CLI-scaffolded): Next.js (web + admin), Hono API, Expo mobile

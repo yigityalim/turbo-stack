@@ -29,11 +29,14 @@ export const supabaseEnv = createEnv({
   client: {
     NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY: z.string().min(1),
+    /** Optional per-app auth storage key so apps sharing a domain don't collide. */
+    NEXT_PUBLIC_SUPABASE_STORAGE_KEY: z.string().min(1).optional(),
   },
   runtimeEnv: {
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY:
       process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
+    NEXT_PUBLIC_SUPABASE_STORAGE_KEY: process.env.NEXT_PUBLIC_SUPABASE_STORAGE_KEY,
   },
   ...shared,
 });
@@ -60,6 +63,21 @@ export const resendEnv = createEnv({
   ...shared,
 });
 
+export const analyticsEnv = createEnv({
+  client: {
+    NEXT_PUBLIC_POSTHOG_KEY: z.string().min(1).optional(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string().url().optional(),
+    /** Which provider(s) `@repo/analytics` mounts. Defaults to "both". */
+    NEXT_PUBLIC_ANALYTICS_PROVIDER: z.enum(["posthog", "vercel", "both", "none"]).optional(),
+  },
+  runtimeEnv: {
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    NEXT_PUBLIC_ANALYTICS_PROVIDER: process.env.NEXT_PUBLIC_ANALYTICS_PROVIDER,
+  },
+  ...shared,
+});
+
 export const upstashEnv = createEnv({
   server: {
     UPSTASH_REDIS_REST_URL: z.string().url().optional(),
@@ -76,6 +94,9 @@ export const sentryEnv = createEnv({
   server: {
     SENTRY_DSN: z.string().url().optional(),
     SENTRY_AUTH_TOKEN: z.string().min(1).optional(),
+    /** Org/project slugs for source-map upload via `withSentryConfig`. */
+    SENTRY_ORG: z.string().min(1).optional(),
+    SENTRY_PROJECT: z.string().min(1).optional(),
   },
   client: {
     NEXT_PUBLIC_SENTRY_DSN: z.string().url().optional(),
@@ -83,6 +104,8 @@ export const sentryEnv = createEnv({
   runtimeEnv: {
     SENTRY_DSN: process.env.SENTRY_DSN,
     SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
+    SENTRY_ORG: process.env.SENTRY_ORG,
+    SENTRY_PROJECT: process.env.SENTRY_PROJECT,
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
   },
   ...shared,

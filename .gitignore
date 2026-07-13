@@ -52,6 +52,9 @@ crates/**/pkg/
 .agents/
 skills-lock.json
 
+# Private, never-committed working notes (maintainer-only strategy/roadmap)
+.private/
+
 # Editor / OS
 .idea
 *.swp

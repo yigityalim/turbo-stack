@@ -14,6 +14,12 @@ concurrency:
 permissions:
   contents: read
 
+# Turborepo remote cache (opt-in): set the TURBO_TOKEN secret + TURBO_TEAM var to
+# share the cache across runs and machines. Absent → local cache only, no error.
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
 jobs:
   check:
     name: Lint, format & type check
@@ -35,7 +41,24 @@ jobs:
         run: bun run lint
 
       - name: Test
-        run: bun run test
+        run: bun run test:coverage
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup
+
+      - name: Build
+        run: bun run build
+        env:
+          # Template apps declare no required env, so validation is skipped and
+          # the build needs no secrets. Real apps set their own vars in CI.
+          SKIP_ENV_VALIDATION: "1"
 
   audit:
     name: Dependency audit
@@ -49,4 +72,3 @@ jobs:
 
       - name: Audit
         run: bun audit --audit-level=high
-        continue-on-error: true

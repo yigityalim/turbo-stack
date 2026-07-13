@@ -1,0 +1,29 @@
+name: SBOM
+
+# Software Bill of Materials — syft scans the manifests (bun + Cargo) and uploads
+# an SPDX SBOM as a workflow artifact. Needs no install, so it runs without a
+# committed lockfile. Runs on main and on demand.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sbom:
+    name: Generate SBOM
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+
+      - name: Generate SPDX SBOM
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
+        with:
+          format: spdx-json
+          artifact-name: turbo-stack.spdx.json

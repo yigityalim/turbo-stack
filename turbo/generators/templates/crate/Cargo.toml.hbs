@@ -1,0 +1,13 @@
+[package]
+name = "{{ kebabCase name }}"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# cdylib -> wasm; rlib -> `cargo test` and reuse as a Rust dependency.
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"

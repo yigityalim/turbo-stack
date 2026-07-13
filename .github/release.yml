@@ -10,4 +10,4 @@ changelog:
       labels: [dependencies]
   exclude:
     labels: [skip-changelog]
-    authors: [dependabot]
+    authors: ["renovate[bot]"]

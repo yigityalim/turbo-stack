@@ -41,6 +41,12 @@ jobs:
       - name: Test
         run: cargo test
 
+      # Supply-chain: scan Cargo.lock against the RustSec advisory database.
+      - name: Audit
+        run: |
+          cargo install cargo-audit --locked
+          cargo audit
+
       - name: Install wasm-pack
         run: curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 

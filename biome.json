@@ -24,6 +24,30 @@
       }
     }
   },
+  "overrides": [
+    {
+      "includes": ["packages/ui/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noArrayIndexKey": "off",
+            "noDocumentCookie": "off"
+          },
+          "correctness": {
+            "useExhaustiveDependencies": "off"
+          },
+          "security": {
+            "noDangerouslySetInnerHtml": "off"
+          },
+          "a11y": {
+            "useFocusableInteractive": "off",
+            "useSemanticElements": "off",
+            "noRedundantRoles": "off"
+          }
+        }
+      }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {
@@ -49,7 +73,8 @@
       "!!**/.next",
       "!!**/.turbo",
       "!!**/dist",
-      "!!**/bun.lock"
+      "!!**/bun.lock",
+      "!!apps/mobile"
     ]
   }
 }

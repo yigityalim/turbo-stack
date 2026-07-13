@@ -28,7 +28,7 @@ Actions tools, `secret-scan.yml` for gitleaks).
 ```sh
 go install github.com/rhysd/actionlint/cmd/actionlint@latest
 go install github.com/suzuki-shunsuke/pinact/v3/cmd/pinact@latest
-go install github.com/zricethezav/gitleaks/v8@latest
+go install github.com/gitleaks/gitleaks/v8@latest
 # zizmor: download the prebuilt binary — `cargo install zizmor` currently fails
 #   to build. https://github.com/zizmorcore/zizmor/releases
 ```

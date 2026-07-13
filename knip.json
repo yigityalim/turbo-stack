@@ -2,19 +2,39 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "workspaces": {
     ".": {
-      "entry": ["scripts/**/*.{js,ts,sh}"],
+      "entry": ["scripts/**/*.{js,ts,sh}", "turbo/generators/**/*.ts"],
       "project": ["**/*.{js,ts,tsx}"]
     },
-    "apps/*": {
-      "entry": [
-        "src/app/**/*.{ts,tsx}",
-        "src/pages/**/*.{ts,tsx}",
-        "next.config.{js,mjs,ts}"
-      ],
+    "apps/marketing/*": {
+      "entry": ["app/**/*.{ts,tsx}", "src/app/**/*.{ts,tsx}", "next.config.{js,mjs,ts}"],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "apps/api": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "apps/mobile": {
+      "entry": ["index.ts", "App.tsx", "app/**/*.{ts,tsx}", "metro.config.js"],
+      "project": ["**/*.{ts,tsx}"]
+    },
+    "packages/ui": {
+      "entry": ["src/components/*.tsx", "src/hooks/*.ts", "src/lib/*.ts", "src/globals.css"],
       "project": ["src/**/*.{ts,tsx}"]
     },
     "packages/*": {
       "entry": ["src/index.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/core/*": {
+      "entry": ["src/index.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/infra/*": {
+      "entry": ["src/index.{ts,tsx}"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "tooling/*": {
+      "entry": ["src/index.{ts,tsx}", "*.json"],
       "project": ["src/**/*.{ts,tsx}"]
     }
   },

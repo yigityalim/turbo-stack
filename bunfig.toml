@@ -43,7 +43,10 @@ shell = "system"
 
 [test]
 # Native bun test runner. Unit tests are colocated as *.test.ts next to source.
-# Coverage stays opt-in (`bun test --coverage`); these only shape its output.
+# CI collects coverage (`bun run test:coverage`); these shape its output.
 coverageSkipTestFiles = true
 coverageReporter = ["text", "lcov"]
 coverageDir = "coverage"
+# Uncomment to gate on coverage once your suite is meaningful (fraction 0..1).
+# A template ships thin tests, so this stays off by default.
+# coverageThreshold = 0.8

@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "@repo/ui/globals.css";
+
+@source "../";
+@source "{{ uiSourcePath group }}";
+
+/*
+ * Design tokens come from @repo/ui/globals.css (single source of truth). The
+ * relative @source above is required so Tailwind scans the shared package's
+ * classes under Turborepo/bun — the node_modules path is unreliable.
+ */
